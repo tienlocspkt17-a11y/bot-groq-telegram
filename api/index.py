@@ -43,7 +43,7 @@ def webhook(path):
                             "content": text
                         }
                     ],
-                    model="llama-3.1-8b-instant", # Bạn có thể đổi sang llama3-70b-8192 nếu muốn nó thông minh hơn nữa
+                    model="llama-3.3-70b-versatile",
                 )
                 reply_text = chat_completion.choices[0].message.content
             except Exception as e:
