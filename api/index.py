@@ -30,9 +30,10 @@ def webhook(path):
             if not text:
                 return jsonify(status="ok")
 
-            # 3. Gọi AI Groq (Dùng model Llama 3 siêu mượt)
+            # 3. Gọi AI Groq chuẩn chỉnh
             try:
                 chat_completion = client.chat.completions.create(
+                    model="llama-3.3-70b-versatile",
                     messages=[
                         {
                             "role": "system",
@@ -42,7 +43,12 @@ def webhook(path):
                             "role": "user",
                             "content": text
                         }
-                    ],
+                    ]
+                )
+                reply_text = chat_completion.choices[0].message.content
+            except Exception as e:
+                reply_text = "Groq đang phản hồi chậm, bạn thử lại nha."
+                print(f"Lỗi Groq chi tiết: {e}")
                     model="llama-3.3-70b-versatile",
                 )
                 reply_text = chat_completion.choices[0].message.content
